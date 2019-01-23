@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+{% load leaflet_tags %}
+{% leaflet_css %}
+{% leaflet_js %}
+{% block navbar %}
+    {% include 'navbar.html' %}
+{% endblock %}
+{% block header %}
+    <link type="text/css" rel="stylesheet" href="{% static 'leaflet-groupedlayercontrol-gh-pages/dist/leaflet.groupedlayercontrol.min.css' %}">
+{% endblock %}
+{% block content %}
+    <br><br>
+    <div class="container-fluid">
+        <div class="col-md-6">
+            <br>
+            <img class="img-responsive img-thumbnail" src="{% if house.photo %}{{ house.photo.url }}{% else %}{% static "img/No_Image_Available.jpg" %}{% endif %}">
+            <h1 class="">{{ house.name }}</h1>
+            <h2><a href="{{ house.category.get_absolute_url }}">{{ house.category}}</a> </h2>
+            <p class="price">Ksh {{ house.price }}</p>
+
+            <p>{{ house.county }} county<br>
+                District:{{ house.district }}
+            </p>
+            <div class="panel panel-info">
+                <p>{{ house.description|linebreaks }}</p>
+            </div>
+            <button type="button" class="btn btn-success btn-outline-success"><a href="{% url 'houses:houseData' house.id house.slug %}">Buy</a></button>
+        </div>
+        <br>
+        <div class="panel panel-success col-md-6 col-offset-md-6">
+            <br>
+            <div id="map" class="panel-body leaflet-map-pane" style="height: 500px">
+                <script type="text/javascript">
+                    function layers(map) {
+                        var osm = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png';
+                        var data  = new L.GeoJSON.AJAX("{% url 'houses:houseData' house.id house.slug %}", {
+                            onEachFeature: function (feature, layer) {
+                                layer.bindPopup(
+                                    feature.properties.name.toString(),
+                                    feature.properties.description.toString()
+                                );
+                            }
+                        });
+                        data.addTo(map);
+                        var baseLayers = {
+                            "OSM": osm
+                        };
+                        var groupedOverlays = {
+                            "Parcel":{
+                                "Parcel": data
+                            }
+                        };
+                        L.control.groupedLayers(baseLayers, groupedOverlays).addTo(map);
+                    }
+                </script>
+                {% leaflet_map "map" callback="window.layers" %}
+            </div>
+            <br>
+        </div>
+    </div>
+    <script type="text/javascript" src="{% static 'leaflet-ajax-gh-pages/dist/leaflet.ajax.js' %}"></script>
+    <script type="text/javascript" src="{% static 'leaflet-groupedlayercontrol-gh-pages/dist/leaflet.groupedlayercontrol.min.js' %}"></script>
+{% endblock %}
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block header %}
+    {% include 'navbar.html' %}
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <header>
+            <h1>{% if category %}{{ category.name }}{% else %}Parcels{% endif %}</h1>
+        </header>
+
+        <div class="row justify-content-md-right">
+            <div id="sidebar" class="col col-lg-2 panel panel-success">
+                <h3>Categories</h3>
+                <ul class="nav nav-tabs nav-stacked">
+                    <li {% if not category %}class=""{% endif %}>
+                        <a href="{% url 'land:parcel_list' %}">All</a>
+                    </li>
+                    {% for c in categories %}
+                        <li {% if category.slug == c.slug %}class="selected"{% endif %}>
+                            <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div id="main" class="col-lg-6 panel panel-primary justify-content-lg-center">
+                <h1>{% if category %}{{ category.name }}{% else %}Parcels{% endif %}</h1>
+                <form method="GET" action="">
+                    {% csrf_token %}
+                    <input type="text" name="query" value="{{ request.GET.query }}" placeholder="Search parcels...">
+                    <input type="submit" value="Search">
+                </form>
+                <br>
+                {% for parcel in parcels %}
+                    <a href="{{ parcel.get_absolute_url }}">
+                        <img class="img-responsive img-thumbnail" src="{% if parcel.photo %}{{ parcel.photo.url }}{% else %}{% static 'img/No_Image_Available.jpg'%}{% endif %}">
+                    </a><br>
+                    <h2><a href="{{ parcel.get_absolute_url }}">{{ parcel.name }}</a></h2>
+                    <h3>Title Number: {{ parcel.title_number }}</h3>
+                    <h3>Approximate area: {{ parcel.area }} Ha</h3>
+                    <h2>Ksh. {{ parcel.price }}</h2>
+                    <div class="">
+                        <h3>County: {{ parcel.county }}</h3>
+                        <h3>District: {{ parcel.district }}</h3>
+                        <h3></h3>
+                    </div>
+                    <br>
+                    <hr>
+                    <br>
+
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+    {% include 'footer.html' %}
+
+{% endblock %}

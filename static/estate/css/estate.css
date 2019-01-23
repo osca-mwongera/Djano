@@ -1,0 +1,19 @@
+body{
+    background: white url("");
+}
+header.masthead {
+    text-align: center;
+    color: #fff;
+    background-image: url("");
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+header.masthead .intro-text {
+    padding-top: 300px;
+    padding-bottom: 200px;
+}

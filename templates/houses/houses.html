@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block header %}
+    {% include 'navbar.html' %}
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <header>
+            <h1>{% if category %}{{ category.name }}{% else %}Houses{% endif %}</h1>
+        </header>
+        <div class="row justify-content-md-right">
+            <div id="sidebar" class="col col-lg-2 panel panel-success">
+                <h3>Type</h3>
+                <ul class="nav nav-tabs nav-stacked">
+                    <li {% if not category %}class="selected"{% endif %}>
+                        <a href="{% url 'houses:house_list' %}">All</a>
+                    </li>
+                    {% for c in categories %}
+                        <li {% if category.slug == c.slug %}class="selected"{% endif %}>
+                            <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div id="main" class="col-lg-6 panel panel-primary justify-content-lg-center">
+                <h1>{% if category %}{{ category.name }}{% else %}Houses{% endif %}</h1>
+                <form method="GET" action="">
+                    {% csrf_token %}
+                    <input type="text" name="query" value="{{ request.GET.query }}" placeholder="Search for a house...">
+                    <input type="submit" value="Search">
+                </form>
+                <br>
+                {% for house in houses %}
+                    <a href="{{ house.get_absolute_url }}">
+                        <img class="img-thumbnail img-responsive" src="{% if house.photo %}{{ house.photo.url }}{% else %}{% static 'img/No_Image_Available.jpg'%}{% endif %}">
+                    </a><br>
+                    <h2><a href="{{ house.get_absolute_url }}">{{ house.name }}</a></h2>
+                    <h2>Ksh {{ house.price }}</h2>
+                    <div class="panel panel-info">
+                        <h3>County: {{ house.county }}</h3>
+                    </div>
+                    <br>
+                    <hr>
+                    <br>
+
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+    {% include 'footer.html' %}
+
+{% endblock %}
