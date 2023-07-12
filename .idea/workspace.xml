@@ -5,11 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bfdc612a-ebc4-4900-bdac-3dc19c724b97" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/fbb911ba-c3d2-45fa-b971-9af15437f6ac.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/fbb911ba-c3d2-45fa-b971-9af15437f6ac.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/estate.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/estate.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/estate/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/estate/settings.py" afterDir="false" />
     </list>
@@ -367,7 +362,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1520502163575</updated>
-      <workItem from="1689075281411" duration="14291000" />
+      <workItem from="1689075281411" duration="16342000" />
     </task>
     <servers />
   </component>
