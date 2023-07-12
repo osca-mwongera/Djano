@@ -7,8 +7,7 @@
     {% include 'navbar.html' %}
 {% endblock %}
 {% block header %}
-    <link type="text/css" rel="stylesheet" href="{% static 'leaflet-groupedlayercontrol-gh-pages/dist/leaflet.groupedlayercontrol.min.css' %}">
-{% endblock %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-groupedlayercontrol/0.6.1/leaflet.groupedlayercontrol.css" integrity="sha512-PpKEvRG//V8hN9idekL4WOjknpMTPFH3MnWpVbVBmlzXpoUfbBSr054U/TUmOzUnCOM9PAPiLhRgq0i00B4q3w==" crossorigin="anonymous" referrerpolicy="no-referrer" />{% endblock %}
 {% block content %}
     <br><br>
     <div class="container-fluid">
@@ -59,9 +58,8 @@
             <br>
         </div>
     </div>
-    <script type="text/javascript" src="{% static 'leaflet-ajax-gh-pages/dist/leaflet.ajax.js' %}"></script>
-    <script type="text/javascript" src="{% static 'leaflet-groupedlayercontrol-gh-pages/dist/leaflet.groupedlayercontrol.min.js' %}"></script>
-{% endblock %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/0.2.0/leaflet.ajax.min.js" integrity="sha512-rQ5LOlEFAvCjdd93ybsBPYGy2rSiTeciSGFxl1VFcP3uy3rtrw+cyr/9Zp0Bm0mAO2uawkZycc0LBft7DbfREQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-groupedlayercontrol/0.6.1/leaflet.groupedlayercontrol.min.js" integrity="sha512-cdomNfv1IRJE1v+2/irZdkNU09XwtYP2bQ1qK1ybWF/vz+P3GTMZtrXwlxTU41ExwoWGvEf0njIak5l/ZQaIMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>{% endblock %}
 {% block footer %}
 {% include 'footer.html' %}
 {% endblock %}
