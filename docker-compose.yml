@@ -5,7 +5,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: python manage.py runserver 0.0.0.0:8000
+    command: sh -c "python3 manage.py wait_for_db && python3 manage.py migrate --noinput && python3 manage.py init_admin && python manage.py collectstatic --no-input --clear && python manage.py runserver 0.0.0.0:8000"
+    restart: "on-failure"
     volumes:
       - .:/usr/src/app/
       - /tmp:/tmp
@@ -13,3 +14,28 @@ services:
       - "8000:8000"
     env_file:
       - ./.env
+    environment:
+      - DB_HOST=db
+    depends_on:
+      - db
+      - pgadmin
+  db:
+    image: postgis/postgis:15-3.3
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+  pgadmin:
+    image: dpage/pgadmin4:7.4
+    environment:
+      - PGADMIN_DEFAULT_PASSWORD=admin
+      - PGADMIN_DEFAULT_EMAIL=admin@admins.admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+volumes:
+  postgres_data:
+
