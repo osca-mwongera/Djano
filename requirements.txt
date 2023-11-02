@@ -1,5 +1,5 @@
 bootstrap4==0.1.0
-Django==4.2.3
+Django==4.2.7
 django-geojson==4.0.0
 django-leaflet==0.29.0
 django-widget-tweaks==1.4.12
